@@ -4,11 +4,11 @@ import java.util.Arrays;
 public class Game {
     ArrayList<Player> players = new ArrayList<>();
 
-    public void register (Player player) {
+    public void register(Player player) {
         players.add(player);
     }
 
-    public int round (String playerName1, String playerName2) {
+    public int round(String playerName1, String playerName2) {
 
         Player player1 = null;
         Player player2 = null;
