@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class GameTest {
     @Test
     public void testFirstPlayer() {
@@ -43,6 +45,41 @@ public class GameTest {
 
         Assertions.assertEquals(expected, actual);
     }
+    @Test
+    public void testFirstPlayersException() throws NotFoundException {
+        Game game = new Game();
+        Player player1 = new Player(1, "V", 20);
+        Player player2 = new Player(2, "N", 20);
 
+        game.register(player1);
 
+        Throwable thrown = assertThrows(NotFoundException.class, () -> {
+            int actual = game.round(player1.getName(), player2.getName());
+        });
+        Assertions.assertEquals("Игрок с именем  " + player2.getName() + " Не найден", thrown.getMessage());
+    }
+    @Test
+    public void testSecondPlayersException() throws NotFoundException {
+        Game game = new Game();
+        Player player1 = new Player(1, "V", 20);
+        Player player2 = new Player(2, "N", 20);
+
+        game.register(player2);
+
+        Throwable thrown = assertThrows(NotFoundException.class, () -> {
+            int actual = game.round(player1.getName(), player2.getName());
+        });
+        Assertions.assertEquals("Игрок с именем  " + player1.getName() + " Не найден", thrown.getMessage());
+    }
+    @Test
+    public void testBothPlayersException() throws NotFoundException {
+        Game game = new Game();
+        Player player1 = new Player(1, "V", 20);
+        Player player2 = new Player(2, "N", 20);
+
+        Throwable thrown = assertThrows(NotFoundException.class, () -> {
+            int actual = game.round(player1.getName(), player2.getName());
+        });
+        Assertions.assertEquals("Игрок с именем  " + player1.getName() + " Не найден", thrown.getMessage());
+    }
 }
