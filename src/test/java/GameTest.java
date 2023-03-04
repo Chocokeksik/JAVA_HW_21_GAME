@@ -81,5 +81,10 @@ public class GameTest {
             int actual = game.round(player1.getName(), player2.getName());
         });
         Assertions.assertEquals("Игрок с именем  " + player1.getName() + " Не найден", thrown.getMessage());
+
+        Throwable thrown1 = assertThrows(NotFoundException.class, () -> {
+            int actual = game.round(player2.getName(), player1.getName());
+        });
+        Assertions.assertEquals("Игрок с именем  " + player2.getName() + " Не найден", thrown1.getMessage());
     }
 }
