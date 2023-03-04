@@ -46,9 +46,39 @@ public class GameTest {
         Assertions.assertEquals(expected, actual);
     }
     @Test
-    public void testFirstPlayersException() throws NotFoundException {
+    public void testPlayerId() {
         Game game = new Game();
         Player player1 = new Player(1, "V", 20);
+
+        int expected = 1;
+        int actual = player1.getId();
+
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void testPlayerName() {
+        Game game = new Game();
+        Player player1 = new Player(1, "V", 20);
+
+        String expected = "V";
+        String actual = player1.getName();
+
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void testPlayerStrength() {
+        Game game = new Game();
+        Player player1 = new Player(1, "V", 20);
+
+        int expected = 20;
+        int actual = player1.getStrength();
+
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void testFirstPlayersException() throws NotFoundException {
+        Game game = new Game();
+        Player player1 = new Player(1, "V", 100);
         Player player2 = new Player(2, "N", 20);
 
         game.register(player1);
@@ -62,7 +92,7 @@ public class GameTest {
     public void testSecondPlayersException() throws NotFoundException {
         Game game = new Game();
         Player player1 = new Player(1, "V", 20);
-        Player player2 = new Player(2, "N", 20);
+        Player player2 = new Player(2, "N", 50);
 
         game.register(player2);
 
@@ -87,4 +117,5 @@ public class GameTest {
         });
         Assertions.assertEquals("Игрок с именем  " + player2.getName() + " Не найден", thrown1.getMessage());
     }
+
 }
